@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsArray, IsEnum, IsNumber, IsOptional, IsString, Min } from 'class-validator';
+import { ProductCategory } from '../schemas/product.schema';
 
 /**
  * 상품 등록 DTO
@@ -30,6 +31,15 @@ export class CreateProductDto {
     enum: ['전자기기', '가구', '의류', '도서', '기타'],
   })
   @IsEnum(['전자기기', '가구', '의류', '도서', '기타'])
+  category: ProductCategory;
+
+  @ApiProperty({
+    description: '거래 지역',
+    example: '서울 강남구',
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
   location?: string;
 
   @ApiProperty({
