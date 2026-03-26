@@ -1,7 +1,15 @@
 {
   "permissions": {
     "allow": [
-      "Bash(dir:*)"
+      "Bash(dir:*)",
+      "Bash(for f:*)",
+      "Bash(do echo:*)",
+      "Read(//c/Users/YES/Desktop/study/sidePorject/commerce-projects/**)",
+      "Bash(done)",
+      "Bash(npx next:*)",
+      "Bash(node_modules/.bin/next --version)",
+      "Bash(npm run:*)",
+      "Bash(ls:*)"
     ],
     "deny": [],
     "ask": []
