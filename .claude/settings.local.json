@@ -9,7 +9,13 @@
       "Bash(npx next:*)",
       "Bash(node_modules/.bin/next --version)",
       "Bash(npm run:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(npm install:*)",
+      "Bash(where gh:*)",
+      "Read(//mnt/c/Users/YES/AppData/Local/GitHub/**)",
+      "Read(//c/Program Files/**)",
+      "Read(//c/Users/YES/scoop/apps/**)",
+      "Read(//c/Users/YES/**)"
     ],
     "deny": [],
     "ask": []
