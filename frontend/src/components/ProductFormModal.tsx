@@ -1,7 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
 const ProductForm = dynamic(
   () => import('@/components/ProductForm').then((m) => ({ default: m.ProductForm })),
@@ -17,6 +17,7 @@ const ProductForm = dynamic(
 
 export function ProductFormModal() {
   const [isOpen, setIsOpen] = useState(false);
+  const handleClose = useCallback(() => setIsOpen(false), []);
 
   return (
     <>
@@ -31,22 +32,22 @@ export function ProductFormModal() {
         <div
           className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
           onClick={(e) => {
-            if (e.target === e.currentTarget) setIsOpen(false);
+            if (e.target === e.currentTarget) handleClose();
           }}
         >
           <div className="bg-white rounded-xl w-full max-w-lg max-h-[90vh] overflow-y-auto p-6">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-bold">상품 등록</h2>
               <button
-                onClick={() => setIsOpen(false)}
+                onClick={handleClose}
                 className="text-gray-400 hover:text-gray-600 text-2xl leading-none"
               >
                 ×
               </button>
             </div>
             <ProductForm
-              onSuccess={() => setIsOpen(false)}
-              onCancel={() => setIsOpen(false)}
+              onSuccess={handleClose}
+              onCancel={handleClose}
             />
           </div>
         </div>
