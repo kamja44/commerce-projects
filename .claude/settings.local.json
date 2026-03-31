@@ -15,7 +15,10 @@
       "Read(//mnt/c/Users/YES/AppData/Local/GitHub/**)",
       "Read(//c/Program Files/**)",
       "Read(//c/Users/YES/scoop/apps/**)",
-      "Read(//c/Users/YES/**)"
+      "Read(//c/Users/YES/**)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(npx tsc:*)"
     ],
     "deny": [],
     "ask": []
