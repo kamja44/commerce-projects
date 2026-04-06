@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { MarketplaceService } from './marketplace.service';
 import { CreateProductDto } from './dto/create-product.dto';
@@ -46,5 +46,14 @@ export class MarketplaceController {
   @ApiOperation({ summary: '카테고리별 상품 조회' })
   getProductsByCategory(@Param('category') category: string) {
     return this.marketplaceService.getProductsByCategory(category);
+  }
+
+  /**
+   * 상품 수정
+   */
+  @Patch('products/:id')
+  @ApiOperation({ summary: '상품 수정' })
+  updateProduct(@Param('id') id: string, @Body() updateData: Partial<CreateProductDto>) {
+    return this.marketplaceService.updateProduct(id, updateData);
   }
 }

@@ -51,4 +51,11 @@ export class MarketplaceService {
   async getProductsByCategory(category: string): Promise<Product[]> {
     return this.productModel.find({ category }).sort({ createdAt: -1 }).exec();
   }
+
+  /**
+   * 상품 수정
+   */
+  async updateProduct(id: string, updateData: Partial<CreateProductDto>): Promise<Product | null> {
+    return this.productModel.findByIdAndUpdate(id, updateData, { new: true }).exec();
+  }
 }

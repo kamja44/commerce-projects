@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useProducts, useProductsByCategory } from '@/features/marketplace/hooks';
 import { Product, ProductCategory } from '@/features/marketplace/types/product';
 import { ProductCard } from './ProductCard';
+import { ProductListSkeleton } from './ProductListSkeleton';
 
 /**
  * ProductList 컴포넌트
@@ -51,11 +52,7 @@ export function ProductList({ onProductClick }: ProductListProps) {
    * 로딩 상태 처리
    */
   if (isLoading) {
-    return (
-      <div className="flex justify-center items-center min-h-[400px]">
-        <div className="text-lg text-gray-600">상품을 불러오는 중...</div>
-      </div>
-    );
+    return <ProductListSkeleton />;
   }
 
   /**

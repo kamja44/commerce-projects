@@ -1,5 +1,7 @@
 import { ProductList } from '@/components/ProductList';
 import { ProductFormModal } from '@/components/ProductFormModal';
+import { Suspense } from 'react';
+import { ProductListSkeleton } from '@/components/ProductListSkeleton';
 
 export const metadata = {
   title: '중고거래 | 통합 커머스 플랫폼',
@@ -17,7 +19,9 @@ export default function MarketplacePage() {
         <ProductFormModal />
       </div>
 
-      <ProductList />
+      <Suspense fallback={<ProductListSkeleton />}>
+        <ProductList />
+      </Suspense>
     </div>
   );
 }

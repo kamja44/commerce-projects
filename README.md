@@ -269,7 +269,8 @@ const filteredProducts = useMemo(() =>
 | 1 | First Load JS (marketplace) | 137 kB | - |
 | 1 | Lighthouse Performance | 100 | - |
 | 2 | First Load JS (marketplace) | 137 kB | 140 kB (ProductFormModal +2 kB, ProductForm은 별도 lazy 청크) |
-| 3 | Lighthouse FCP | - | - |
+| 3 | Lighthouse FCP | 0.2s | 0.2s |
+| 3 | Lighthouse CLS | 0.024 | 0 (스켈레톤 UI로 레이아웃 시프트 제거) |
 | 4 | Lighthouse TBT | - | - |
 | 5 | Lighthouse LCP | - | - |
 | 6 | 리렌더 횟수 (Profiler) | - | - |
