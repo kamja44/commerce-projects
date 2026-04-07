@@ -2,13 +2,27 @@ import { ProductList } from '@/components/ProductList';
 import { ProductFormModal } from '@/components/ProductFormModal';
 import { Suspense } from 'react';
 import { ProductListSkeleton } from '@/components/ProductListSkeleton';
+import { Product } from '@/features/marketplace/types/product';
 
 export const metadata = {
   title: '중고거래 | 통합 커머스 플랫폼',
   description: '안전하고 편리한 중고 물품 거래',
 };
 
-export default function MarketplacePage() {
+const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3001';
+
+async function getProducts(): Promise<Product[]> {
+  const res = await fetch(`${API_URL}/marketplace/products`, {
+    cache: 'no-store',
+  });
+  if (!res.ok) {
+    throw new Error('Failed to fetch products');
+  }
+  return res.json();
+}
+
+export default async function MarketplacePage() {
+  const products = await getProducts();
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
@@ -20,7 +34,7 @@ export default function MarketplacePage() {
       </div>
 
       <Suspense fallback={<ProductListSkeleton />}>
-        <ProductList />
+        <ProductList initialProducts={products} />
       </Suspense>
     </div>
   );

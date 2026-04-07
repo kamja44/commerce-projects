@@ -12,10 +12,11 @@ import { ProductListSkeleton } from './ProductListSkeleton';
  * - 기능: 전체 상품 조회, 카테고리별 필터, 로딩/에러 처리
  */
 interface ProductListProps {
+  initialProducts?: Product[];
   onProductClick?: (product: Product) => void;
 }
 
-export function ProductList({ onProductClick }: ProductListProps) {
+export function ProductList({ onProductClick, initialProducts }: ProductListProps) {
   /**
    * 선택된 카테고리 상태
    * - 용도: 카테고리 필터링을 위한 상태
@@ -32,7 +33,7 @@ export function ProductList({ onProductClick }: ProductListProps) {
    * 전체 상품 조회
    * - selectedCategory가 없을 때 사용
    */
-  const allProductsQuery = useProducts();
+  const allProductsQuery = useProducts({ initialData: initialProducts });
 
   /**
    * 카테고리별 상품 조회
