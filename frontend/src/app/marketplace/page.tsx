@@ -3,6 +3,7 @@ import { ProductFormModal } from '@/components/ProductFormModal';
 import { Suspense } from 'react';
 import { ProductListSkeleton } from '@/components/ProductListSkeleton';
 import { Product } from '@/features/marketplace/types/product';
+import { STATIC_BLUR_DATA_URL } from '@/features/marketplace/utils/blurDataURL';
 
 export const metadata = {
   title: '중고거래 | 통합 커머스 플랫폼',
@@ -21,8 +22,18 @@ async function getProducts(): Promise<Product[]> {
   return res.json();
 }
 
+type ProductWithBlur = Product & { blurDataURL?: string };
+
+function enrichProductsWithBlur(products: Product[]): ProductWithBlur[] {
+  return products.map((product) => ({
+    ...product,
+    blurDataURL: product.images?.[0] ? STATIC_BLUR_DATA_URL : undefined,
+  }));
+}
+
 export default async function MarketplacePage() {
   const products = await getProducts();
+  const enrichedProducts = enrichProductsWithBlur(products);
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
@@ -34,7 +45,7 @@ export default async function MarketplacePage() {
       </div>
 
       <Suspense fallback={<ProductListSkeleton />}>
-        <ProductList initialProducts={products} />
+        <ProductList initialProducts={enrichedProducts} />
       </Suspense>
     </div>
   );

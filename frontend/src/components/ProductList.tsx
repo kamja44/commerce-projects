@@ -6,13 +6,14 @@ import { Product, ProductCategory } from '@/features/marketplace/types/product';
 import { ProductCard } from './ProductCard';
 import { ProductListSkeleton } from './ProductListSkeleton';
 
+type ProductWithBlur = Product & { blurDataURL?: string };
 /**
  * ProductList 컴포넌트
  * - 역할: 상품 목록 표시 및 카테고리 필터링
  * - 기능: 전체 상품 조회, 카테고리별 필터, 로딩/에러 처리
  */
 interface ProductListProps {
-  initialProducts?: Product[];
+  initialProducts?: ProductWithBlur[];
   onProductClick?: (product: Product) => void;
 }
 
@@ -121,8 +122,8 @@ export function ProductList({ onProductClick, initialProducts }: ProductListProp
 
       {/* 상품 그리드 */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {products.map((product) => (
-          <ProductCard key={product._id} product={product} onClick={onProductClick} />
+        {products.map((product, index) => (
+          <ProductCard key={product._id} index={index} product={product} onClick={onProductClick} />
         ))}
       </div>
     </div>

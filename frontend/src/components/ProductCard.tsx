@@ -4,12 +4,15 @@ import Image from 'next/image';
 import { Product } from '@/features/marketplace/types/product';
 import { formatPrice, getStatusClass, getStatusText } from '@/features/marketplace/utils';
 
+type ProductWithBlur = Product & { blurDataURL?: string };
+
 interface ProductCardProps {
-  product: Product;
+  product: ProductWithBlur;
+  index?: number;
   onClick?: (product: Product) => void;
 }
 
-export function ProductCard({ product, onClick }: ProductCardProps) {
+export function ProductCard({ product, index = 0, onClick }: ProductCardProps) {
   return (
     <div
       onClick={() => onClick?.(product)}
@@ -23,6 +26,9 @@ export function ProductCard({ product, onClick }: ProductCardProps) {
             fill
             className="object-cover"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+            priority={index < 4}
+            placeholder={product.blurDataURL ? 'blur' : 'empty'}
+            blurDataURL={product.blurDataURL}
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-gray-400">
