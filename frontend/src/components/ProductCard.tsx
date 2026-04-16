@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { memo, useCallback } from 'react';
 import { Product } from '@/features/marketplace/types/product';
 import { formatPrice, getStatusClass, getStatusText } from '@/features/marketplace/utils';
 
@@ -12,10 +13,14 @@ interface ProductCardProps {
   onClick?: (product: Product) => void;
 }
 
-export function ProductCard({ product, index = 0, onClick }: ProductCardProps) {
+export const ProductCard = memo(function ProductCard({ product, index = 0, onClick }: ProductCardProps) {
+  const handleClick = useCallback(() => {
+    onClick?.(product);
+  }, [onClick, product]);
+
   return (
     <div
-      onClick={() => onClick?.(product)}
+      onClick={handleClick}
       className="border rounded-lg overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
     >
       <div className="aspect-square bg-gray-200 relative">
@@ -59,4 +64,4 @@ export function ProductCard({ product, index = 0, onClick }: ProductCardProps) {
       </div>
     </div>
   );
-}
+});
