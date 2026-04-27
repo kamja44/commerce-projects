@@ -7,6 +7,7 @@ export function useProductsByCategory(category: string) {
   return useQuery({
     queryKey: ['products', 'category', category],
     queryFn: () => getProductsByCategory(category),
-    enabled: !!category, // category가 있을 때만 쿼리 실행
+    enabled: !!category,
+    staleTime: 60 * 1000,
   });
 }

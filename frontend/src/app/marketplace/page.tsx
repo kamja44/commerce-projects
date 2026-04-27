@@ -14,7 +14,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3001';
 
 async function getProducts(): Promise<Product[]> {
   const res = await fetch(`${API_URL}/marketplace/products`, {
-    cache: 'no-store',
+    next: { revalidate: 60 },
   });
   if (!res.ok) {
     throw new Error('Failed to fetch products');

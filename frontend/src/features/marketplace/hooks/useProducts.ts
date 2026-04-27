@@ -13,5 +13,6 @@ export function useProducts(options?: UseProductsOptions) {
     queryKey: ['products'],
     queryFn: getProducts,
     initialData: options?.initialData,
+    staleTime: 60 * 1000,
   });
 }
